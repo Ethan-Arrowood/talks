@@ -15,7 +15,6 @@
       color: #6d64ff;
     }
     code {
-      border: 0.1em solid #000;
       border-radius: 0.5em;
       font-weight: 500;
     }
@@ -48,7 +47,7 @@
   </div>
   <div class='layout' style='grid-template-rows: 75% 25%;'>
     <img src="images/undraw_Profile_data_re_v81r.svg"/>
-    <div>Handeling data</div>
+    <div style="justify-content: center;">Handeling data</div>
   </div>
   <div class='layout' style='grid-template-rows: 50% 50%;'>
 
@@ -56,7 +55,7 @@
       <img src="images/undraw_design_data_khdb.svg"/>
     </div>
 
-    <div>
+    <div style="justify-content: center;">
       <ul>
         <li>API routes</li>
         <li>Forms</li>
@@ -196,7 +195,7 @@ const BodySchema = Type.Object({
   )
 })
 
-type TBodySchema = Static&#60;BodySchema&#62;
+type TBodySchema = Static&#60;typeof BodySchema&#62;
 
 fastify.post&#60;{
   Body: TBodySchema
