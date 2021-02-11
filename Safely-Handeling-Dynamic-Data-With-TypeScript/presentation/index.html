@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Big</title>
+  <link href="big.css" rel="stylesheet" type="text/css" />
+  <link href="themes/dark.css" rel="stylesheet" type="text/css" />
+  <script src="big.js"></script>
+  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> -->
+  <style>
+    body {
+      color: skyblue;
+    }
+    pre {
+      margin:0;
+      padding:0.2em;
+      background:#fff;
+      color:#000;
+      font-weight:normal;
+    }
+    pre em {
+      color:#000;
+      background:yellow;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    Safely Handeling Dynamic Data with TypeScript
+    <notes>Speakers notes go here.</notes>
+  </div>
+  <div class='layout' style='grid-template-rows: 75% 25%;'>
+    <img src="images/problem.jpg"/>
+    <div>Handeling data</div>
+  </div>
+  <div>
+    Payload Record
+    <pre><code class="json">{
+  "id": "abc123",
+  "name": "Sarah Jones",
+  "employed": true,
+  "company": "Microsoft",
+  "age": 30
+}</code></pre>
+  </div>
+  <div>
+    API Route
+    <pre>fastify.post(
+  '/add-user',
+  async (request, response) => {
+    const { <em>body</em> } = request
+  }
+)</pre>
+  </div>
+</body>
+</html>
