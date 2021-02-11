@@ -5,55 +5,238 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
   <title>Big</title>
   <link href="big.css" rel="stylesheet" type="text/css" />
-  <link href="themes/dark.css" rel="stylesheet" type="text/css" />
+  <link href="themes/light.css" rel="stylesheet" type="text/css" />
   <script src="big.js"></script>
-  <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> -->
+  <link rel="stylesheet" href="highlight/styles/night-owl.css">
+  <script src="highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
   <style>
     body {
-      color: skyblue;
+      color: #6d64ff;
+    }
+    code {
+      border: 0.1em solid #000;
+      border-radius: 0.5em;
+      font-weight: 500;
+    }
+  </style>
+  <!-- <style>
+    body {
+      color: #6d64ff;
     }
     pre {
       margin:0;
       padding:0.2em;
-      background:#fff;
+      /* background:#f5f5f5; */
+      background:rgb(238, 222, 200);
       color:#000;
+      border: 0.1em solid #000;
+      border-radius: 0.5em;
       font-weight:normal;
     }
     pre em {
       color:#000;
       background:yellow;
     }
-  </style>
+  </style> -->
 </head>
 <body>
   <div>
-    Safely Handeling Dynamic Data with TypeScript
+    <div>Safely Handling Dynamic Data with TypeScript</div>
+    <small style="font-size: 0.50em; color: darkgoldenrod;">Ethan Arrowood - @ArrowoodTech</small>
     <notes>Speakers notes go here.</notes>
   </div>
   <div class='layout' style='grid-template-rows: 75% 25%;'>
-    <img src="images/problem.jpg"/>
+    <img src="images/undraw_Profile_data_re_v81r.svg"/>
     <div>Handeling data</div>
   </div>
+  <div class='layout' style='grid-template-rows: 50% 50%;'>
+
+    <div>
+      <img src="images/undraw_design_data_khdb.svg"/>
+    </div>
+
+    <div>
+      <ul>
+        <li>API routes</li>
+        <li>Forms</li>
+        <li>Authentication</li>
+      </ul>
+    </div>
+  </div>
+
   <div>
-    Payload Record
+    Payload Record - JSON Object
     <pre><code class="json">{
   "id": "abc123",
   "name": "Sarah Jones",
   "employed": true,
   "company": "Microsoft",
-  "age": 30
+  "age": 30,
+  "projects": [
+    "calculator",
+    "todo",
+    "blog"
+  ]
 }</code></pre>
   </div>
+
   <div>
     API Route
-    <pre>fastify.post(
+    <pre><code class="javascript">fastify.post(
   '/add-user',
   async (request, response) => {
     const { <em>body</em> } = request
   }
-)</pre>
+)</code></pre>
+    What type is <i>body</i> ?
+  </div>
+
+  <div>
+    Record
+    <br>
+    object
+    <br>
+    any
+  </div>
+
+  <div class='layout' style='grid-template-rows: 25% 75%;'>
+    <div style="justify-content: center;"><i>unknown</i></div>
+    <img src="images/undraw_lost_bqr2.svg" alt="Man holding map symbolising the word unknown">
+  </div>
+
+  <div>
+    <pre><code class="json">{
+  "id": "abc123",
+  "name": "Sarah Jones",
+  // ...
+}</code></pre>
+    <pre><code class="javascript">fastify.post(
+  '/add-user',
+  async (request, response) => {
+    const { body } = request
+    // body is unknown
+    <em>body.name</em>
+  }
+)</code></pre>
+What is <i>body.name</i> ?
+  </div>
+
+  <div class='layout' style='grid-template-rows: 25% 75%;'>
+    <div style="justify-content: center;"><i>string</i></div>
+    <img src="images/undraw_Playful_cat_rchv.svg" alt="">
+  </div>
+
+  <div class='layout' style='grid-template-rows: 25% 75%;'>
+    <div style="justify-content: center;"><i> Object is of type 'unknown'. (2571)</i></div>
+    <img src="images/undraw_bug_fixing_oc7a.svg" alt="">
+  </div>
+
+  <div class='layout' style='grid-template-rows: 70% 30%;'>
+    <img src="images/undraw_super_woman_dv0y.svg" alt="">
+    <div style="justify-content: center;">JSON Schema</div>
+  </div>
+
+  <div>
+    JSON Schema
+    <pre><code class="json">{
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "employed": { "type": "boolean" },
+    "company": { "type": "string" },
+    "age": { "type": "number" },
+    "projects": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": [ "id", "name" ],
+  "additionalProperties": false
+}</code></pre>
+  </div>
+
+  <div>
+    Generally, JSON Schema is intended for <span style="color: gold; background-color: #6d64ff;">&nbsp;validation&nbsp;</span>
+  </div>
+
+  <div>
+    <img src="images/undraw_happy_2021_h01d.svg" alt="">
+  </div>
+
+  <div class='layout' style='grid-template-rows: 70% 30%;'>
+    <img src="images/undraw_superhero_kguv.svg" alt="">
+    <div style="justify-content: center;">TypeBox</div>
+  </div>
+
+  <div>
+    <pre><code>npm install @sinclair/typebox</code></pre>
+    <br>
+    <pre><code class="typescript">
+import { Static, Type } from '@sinclair/typebox'
+
+const T = Type.String() <span style="color: #878787">/* const T = { "type": "string" } */</span>
+
+type T = Static&#60;typeof T&#62; <span style="color: #878787">/* type T = string */</span>
+</code></pre>
+  </div>
+
+  <div>
+    JSON Schema + TypeBox
+    <pre><code class="typescript">
+const BodySchema = Type.Object({
+  id: Type.String(),
+  name: Type.String(),
+  employed: Type.Optional(Type.Boolean()),
+  company: Type.Optional(Type.String()),
+  age: Type.Optional(Type.Number()),
+  projects: Type.Optional(
+    Type.Array(Type.String())
+  )
+})
+
+type TBodySchema = Static&#60;BodySchema&#62;
+
+fastify.post&#60;{
+  Body: TBodySchema
+}&#62;(
+  '/add-user',
+  { schema: { body: BodySchema }},
+  async (request, response) => {
+    const { <em>body</em> } = request
+    // type body = TBodySchema
+    // type body.name = string
+    // type body.age = number | undefined
+  }
+)
+</code></pre>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 80% 20%;'>
+    <img src="images/undraw_Powerful_re_frhr.svg" alt="">
+    <div style="justify-content: center;">JSON Schema + TypeBox + Fastify</div>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 20% 60% 20%;'>
+    <div style="justify-content: center;">Shoutout to unDraw</div>
+    <img src="images/undraw_super_thank_you_obwk.svg" alt="">
+    <div style="justify-content: center;">https://undraw.co/</div>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 20% 60% 10% 10%;'>
+    <div style="justify-content: center;">Built with highlight.js & tmcw/big</div>
+    <img src="images/undraw_building_websites_i78t.svg" alt="">
+    <div style="justify-content: center;">https://highlightjs.org/</div>
+    <div style="justify-content: center;">https://github.com/tmcw/big</div>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 10% 60% 10% 10% 10%;'>
+    <div style="justify-content: center;">Thank You!</div>
+    <img src="images/IMG_7065.jpg" alt="">
+    <div style="justify-content: center;">Ethan Arrowood</div>
+    <div style="justify-content: center;">Twitter: @ArrowoodTech</div>
+    <div style="justify-content: center;">GitHub: @Ethan-Arrowood</div>
   </div>
 </body>
 </html>
