@@ -1,4 +1,4 @@
-# Safely Handeling Dynamic Data with TypeScript
+# Safely Handling Dynamic Data with TypeScript
 
 TypeScript makes JavaScript safer by adding **static** type definitions.
 Static definitions are wonderful; they prevent developers from making trivial mistakes by ensuring every assignment and invocation is done correctly.
