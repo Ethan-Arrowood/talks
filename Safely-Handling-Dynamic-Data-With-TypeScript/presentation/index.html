@@ -60,6 +60,7 @@
         <li>API routes</li>
         <li>Forms</li>
         <li>Authentication</li>
+        <li>Environment Variables</li>
       </ul>
     </div>
   </div>
@@ -92,15 +93,13 @@
   </div>
 
   <div>
-    Record
-    <br>
-    object
-    <br>
-    any
+    <pre><code>Record&#60;T&#62;</code></pre>
+    <pre><code>object</code></pre>
+    <pre><code>any</code></pre>
   </div>
 
   <div class='layout' style='grid-template-rows: 25% 75%;'>
-    <div style="justify-content: center;"><i>unknown</i></div>
+    <div style="justify-content: center; margin-bottom: 10px;"><pre><code>unknown</code></pre></div>
     <img src="images/undraw_lost_bqr2.svg" alt="Man holding map symbolising the word unknown">
   </div>
 
@@ -122,12 +121,14 @@ What is <i>body.name</i> ?
   </div>
 
   <div class='layout' style='grid-template-rows: 25% 75%;'>
-    <div style="justify-content: center;"><i>string</i></div>
+    <div style="justify-content: center; margin-bottom: 10px;"><pre><code>string</code></pre></div>
     <img src="images/undraw_Playful_cat_rchv.svg" alt="">
   </div>
 
   <div class='layout' style='grid-template-rows: 25% 75%;'>
-    <div style="justify-content: center;"><i> Object is of type 'unknown'. (2571)</i></div>
+    <div style="justify-content: center;">
+      <pre><code>// Object is of type 'unknown'. (2571)</code></pre>
+    </div>
     <img src="images/undraw_bug_fixing_oc7a.svg" alt="">
   </div>
 
@@ -195,11 +196,9 @@ const BodySchema = Type.Object({
   )
 })
 
-type TBodySchema = Static&#60;typeof BodySchema&#62;
+type BodySchema = Static&#60;typeof BodySchema&#62;
 
-fastify.post&#60;{
-  Body: TBodySchema
-}&#62;(
+fastify.post&#60;{ Body: BodySchema }&#62;(
   '/add-user',
   { schema: { body: BodySchema }},
   async (request, response) => {
@@ -217,6 +216,60 @@ fastify.post&#60;{
     <div style="justify-content: center;">JSON Schema + TypeBox + Fastify</div>
   </div>
 
+  <div class="layout" style='grid-template-rows: 70% 30%;'>
+    <img src="images/undraw_Gift_box_re_vau4.svg" alt="">
+    <div style="justify-content: center;">It gets better!</div>
+  </div>
+
+  <div class="layout" style='grid-template-rows: 70% 30%;'>
+    <img src="images/undraw_Beer_celebration_cefj.svg" alt="">
+    <div style="justify-content: center;">Undici + AJV</div>
+  </div>
+
+  <div>
+    <pre><code class="typescript">
+const AddUserResponseSchema = Type.Object({
+  message: Type.String()
+})
+
+type AddUserResponseSchema = Static&#60;typeof AddUserResponseSchema&#62;
+
+function isAddUserResponse (responseData: unknown):
+  responseData is AddUserResponseSchema {
+  const ajv = new Ajv().addKeyword('kind')
+
+  return ajv.validate(AddUserResponseSchema, responseData)
+}
+
+const user: UserSchema = {
+  id: '123',
+  name: 'Clippy'
+}
+
+const { body } = await undici.request(
+  `http://localhost:${PORT}/add-user`,
+  {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: { 'content-type': 'application/json' }
+  }
+)
+
+const data = await readBody(body)
+
+const addUserResponse = JSON.parse(data)
+
+if (isAddUserResponse(addUserResponse)) {
+  console.log(addUserResponse.message) // 🎉
+}
+</code></pre>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 30% 70%'>
+    <div style="justify-content: center;">Run it live!</div>
+    <img src="images/undraw_Nature_fun_re_iney.svg" alt="">
+  </div>
+
   <div class='layout' style='grid-template-rows: 20% 60% 20%;'>
     <div style="justify-content: center;">Shoutout to unDraw</div>
     <img src="images/undraw_super_thank_you_obwk.svg" alt="">
@@ -232,7 +285,7 @@ fastify.post&#60;{
 
   <div class='layout' style='grid-template-rows: 10% 60% 10% 10% 10%;'>
     <div style="justify-content: center;">Thank You!</div>
-    <img src="images/IMG_7065.jpg" alt="">
+    <img src="images/me-and-lincoln.jpg" alt="">
     <div style="justify-content: center;">Ethan Arrowood</div>
     <div style="justify-content: center;">Twitter: @ArrowoodTech</div>
     <div style="justify-content: center;">GitHub: @Ethan-Arrowood</div>
