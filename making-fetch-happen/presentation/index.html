@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <title>Big</title>
+  <link href="big.css" rel="stylesheet" type="text/css" />
+  <link href="themes/light.css" rel="stylesheet" type="text/css" />
+  <script src="big.js"></script>
+  <link rel="stylesheet" href="highlight/styles/night-owl.css">
+  <script src="highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <style>
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Making Fetch Happen</h1>
+    <br>
+    <small>Ethan Arrowood <br> Twitter: @ArrowoodTech <br> GitHub: @Ethan-Arrowood</small>
+  </div>
+
+  <div>
+    <img src="./media/lincoln-trying-to-fetch.png" alt="Lincoln trying (and failing) to catch a frisbee">
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Kp7GvsU7_cE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+    <!-- <video src="./lincoln-fetch.mp4" type="video/mp4" controls="controls" height="100%" name="Video of Lincoln attempting to fetch a frisbee"></video> -->
+  </div>
+
+  <div>
+    XMLHttpRequest
+    <img src="./media/laptop-server.svg" alt="">
+  </div>
+
+  <div>
+    <span style="text-decoration: underline;">AJAX</span>
+    <br>
+    <small>Asynchronous JavaScript and XML</small>
+  </div>
+
+  <div>
+    XHR Specification
+    <small>https://xhr.spec.whatwg.org</small>
+  </div>
+
+  <div>
+    <span style="text-decoration: underline;">WHATWG</span>
+    <br>
+    <small>Web Hypertext Application Technology Working Group</small>
+  </div>
+
+  <div>
+    <span style="text-decoration: underline;">W3C</span>
+    <br>
+    <small>World Wide Web Consortium</small>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 40% 50% 10%;'>
+    <div>Service Workers</div>
+    <img src="./media/undraw_engineering_team_u99p.svg" alt="">
+    <small>https://w3c.github.io/ServiceWorker/</small>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 50% 50%;'>
+    <div class="nowrap">Programmable network proxy</div>
+    <img src="./media/service-worker.png" alt="diagram of web application & service worker flow">
+  </div>
+
+  <div class='layout' style='grid-template-rows: 50% 50%;'>
+    <div>Promises</div>
+    <img src="./media/undraw_business_deal_re_up4u.svg" alt="">
+  </div>
+
+  <div>
+    <img src="./media/undraw_fitting_piece_iilo.svg" alt="">
+  </div>
+
+  <div>
+    Better Networking Interfaces
+  </div>
+
+  <div>
+    Fetch
+    <img src="./media/fetch-example.png" alt="">
+  </div>
+
+  <div>
+    <ul>
+      <li>Modern async patterns</li>
+      <li>Class based networking interfaces</li>
+      <li>Based on existing CORS standard</li>
+    </ul>
+  </div>
+
+  <div>
+    <span style="text-decoration: underline;">CORS</span>
+    <br>
+    <small>Cross-Origin Resource Sharing</small>
+    <br>
+    <small class="nowrap">https://www.w3.org/TR/2014/REC-cors-20140116/</small>
+  </div>
+
+  <div>
+    <ul>
+      <li>URL</li>
+      <li class="nowrap">streams (2015 - <a href="https://github.com/whatwg/fetch/commit/0158ce0">#0158ce0</a>)</li>
+      <li class="nowrap">AbortController (2017 - <a href="https://github.com/whatwg/fetch/commit/0bcd5df">#0bcd5df</a>)</li>
+    </ul>
+  </div>
+
+  <div>
+    <img src="./media/undraw_celebration_re_kc9k.svg" alt="">
+  </div>
+
+  <div>Isomorphic JavaScript</div>
+
+  <div><pre><code class="javascript">
+function sumArray (arr) {
+  return arr.reduce((s, c) => s += c, 0)
+}
+
+sumArray([1, 2, 3]) // -> 6
+  </code></pre></div>
+
+  <div><pre><code class="javascript">
+const button = document.getElementById('button')
+button.onclick = () => {
+  console.log('Hello, World!')
+}
+
+// Browser -> No issue!
+// Node.js -> Uncaught ReferenceError: document is not defined
+  </code></pre></div>
+
+  <div>Progressive Web Applications</div>
+
+  <div>
+    <img src="./media/iso-js-1.png" alt="">
+  </div>
+
+  <div>
+    <img src="./media/iso-js-2.png" alt="">
+  </div>
+
+  <div>
+    <img src="./media/undraw_loading_re_5axr.svg" alt="">
+  </div>
+
+  <div>
+    <img src="./media/iso-js-3.png" alt="">
+  </div>
+
+  <div>
+    <img src="./media/undraw_fast_car_p-4-cu.svg" alt="">
+  </div>
+
+  <div>
+    <img src="./media/iso-js-4.png" alt="">
+  </div>
+
+  <div><img src="./media/iso-js-5.png" alt=""></div>
+
+  <div>
+    Node.js
+    <pre><code class="javascript">import { request } from 'http'</code></pre>
+    added in v0.3.6
+  </div>
+
+  <div>
+    <ul>
+      <li>request</li>
+      <li>got</li>
+      <li>axios</li>
+      <li>node-fetch</li>
+      <li>...</li>
+    </ul>
+  </div>
+
+  <div>
+    <img src="./media/standards.png" alt="">
+    https://xkcd.com/927/
+  </div>
+
+  <div class="layout" style='grid-template-rows: 30% 70%;'>
+    <div>Opinions</div>
+    <img src="./media/undraw_personal_opinions_re_qw29.svg" alt="">
+  </div>
+
+  <div>
+    Simplicity
+    <pre><code class="javascript">
+import got from 'got'
+const response = await got('https://sindresorhus.com')
+response.body // -> '&#60;!doctype html&#62; ...'
+    </code></pre>
+    https://github.com/sindresorhus/got
+  </div>
+
+  <div>
+    Efficiency
+    <pre><code class="javascript">
+import { stream } from 'undici'
+import { Writable } from 'stream'
+
+const bufs = []
+await stream(
+  'https://undici.nodejs.org',
+  { method: 'GET', opaque: { bufs } },
+  ({ opaque: { bufs } }) =>
+    new Writable({
+      write (c, _, cb) {
+        bufs.push(c)
+        cb()
+      }
+  })
+)
+
+console.log(Buffer.concat(bufs).toString('utf-8'))
+// -> '&#60;!doctype html&#62; ...'
+    </code></pre>
+    https://undici.nodejs.org
+  </div>
+
+  <div>
+    Familiarity
+    <pre><code class="javascript">
+import fetch from 'node-fetch'
+const response = await fetch('https://github.com/');
+const body = await response.text();
+
+console.log(body);
+// -> '&#60;!doctype html&#62; ...'
+    </code></pre>
+    https://github.com/node-fetch/node-fetch
+  </div>
+
+  <div>Fetch & Node.js</div>
+
+  <div>
+    Timeline
+    <ul>
+      <li class="nowrap">(2014) github/fetch</li>
+      <li class="nowrap">(2014) matthew-andrews/isomorphic-fetch</li>
+      <li class="nowrap">(2015) node-fetch/node-fetch</li>
+      <li class="nowrap">(2017) npm/make-fetch-happen</li>
+      <li class="nowrap">(2017) lquixada/cross-fetch</li>
+      <li class="nowrap">(2018) Add fetch to Node.js <a href="https://github.com/nodejs/node/issues/19393">nodejs/node #19393</a></li>
+      <li class="nowrap">(2019) npm/minipass-fetch</li>
+      <li class="nowrap">(2019) node-fetch vendored into Node.js <a href="https://github.com/nodejs/node/pull/27979">nodejs/node #27979</a></li>
+      <li class="nowrap">(2020) ethan-arrowood/undici-fetch</li>
+      <li class="nowrap">(2021) undici-fetch ported to undici<a href="https://github.com/nodejs/undici/pull/912">nodejs/undici #912</a></li>
+    </ul>
+  </div>
+
+  <div>
+    Node.js is hard at work implementing WHATWG APIs
+    <ul>
+      <li class="nowrap">URL (added in v6.13.0/v7.0.0)</li>
+      <li class="nowrap">EventTarget (added in v14.5.0; non-experimental in v15.4.0)</li>
+      <li class="nowrap">AbortController (added in v14.17.0; non-experimental in v15.4.0)</li>
+      <li class="nowrap">Web Streams (added in v16.5.0; currently experimental)</li>
+      <li class="nowrap">structureClone (added in v17.0.0 as non-experimental)</li>
+    </ul>
+    
+    <span class="nowrap">There are many more too; these are just the ones immediately relevant for Fetch</span>
+  </div>
+
+  <div>
+    <img src="./media/undici-fetch-milestone.png" alt="">
+  </div>
+
+  <div class="layout" style='grid-template-rows: 30% 70%;'>
+    <div>Thank You Contributors ❤️</div>
+    <img src="./media/undraw_super_thank_you_re_f8bo.svg" alt="">
+  </div>
+
+  <div>
+    <span style="text-decoration: underline;">You</span> can help!
+    <ul>
+      <li class="nowrap">
+        Try out undici fetch
+        <ul>
+          <li>Drop in replacement for node-fetch</li>
+        </ul>
+      </li>
+      <li class="nowrap">Contribute to undici and Node.js</li>
+      <li class="nowrap">More isomorphic JavaScript</li>
+    </ul>
+  </div>
+
+  <div>
+    Other things to watch
+    <ul>
+      <li class="nowrap">To be or not to be in core (<a href="https://github.com/nodejs/TSC/issues/1041">nodejs/tsc #1041</a> & <a href="https://github.com/nodejs/node/pull/40338">nodejs/node #40338</a>)</li>
+      <li class="nowrap">Future of the Node HTTP Client (<a href="https://github.com/nodejs/node/issues/38533">nodejs/node #38533</a>)</li>
+      <li class="nowrap">Adding HTML Form Data to core (<a href="https://github.com/nodejs/node/issues/38943">nodejs/node #38943</a>)</li>
+      <li class="nowrap">Integrating undici into other http clients (<a href="https://github.com/nodejs/undici/issues/837">nodejs/undici #837</a>)</li>
+      <li class="nowrap">Undici Fetch Milestone (<a href="https://github.com/nodejs/undici/milestone/5">nodejs/undici milestone #5</a>)</li>
+    </ul>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 10% 60% 10%;'>
+    <div>Built with</div>
+    <img src="./media/undraw_building_websites_i78t.svg" alt="">
+    <ul>
+      <li class="nowrap">unDraw - <a href="https://undraw.co/">https://undraw.co/</a></li>
+      <li class="nowrap">excalidraw - <a href="https://excalidraw.com/">https://excalidraw.com/</a></li>
+      <li class="nowrap">highlightjs - <a href="https://highlightjs.org/">https://highlightjs.org/</a></li>
+      <li class="nowrap">tmcw/big - <a href="https://github.com/tmcw/big">https://github.com/tmcw/big</a></li>
+    </ul>
+  </div>
+
+  <div class='layout' style='grid-template-rows: 10% 60% 10% 10% 10%;'>
+    <div style="justify-content: center;">Thank You!</div>
+    <img src="./media/lincoln-and-ethan.JPG" alt="">
+    <div style="justify-content: center;">Ethan Arrowood</div>
+    <div style="justify-content: center;">Twitter: @ArrowoodTech</div>
+    <div style="justify-content: center;">GitHub: @Ethan-Arrowood</div>
+  </div>
+</body>
+</html>

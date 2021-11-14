@@ -34,8 +34,12 @@ For a better developer experience, the Service Worker API needed better networki
 ## Introducing, Fetch
 
 ```js
-const response = await fetch('https://ethanarrowood.com')
-const blob = await response.blob()
+
+const response = await fetch('https://my-api.dev')
+const data = await response.json()
+
+// data -> { fuzz: "buzz" }
+
 ```
 
 An extension of the CORS specification from W3C, the Fetch standard was developed by WHATWG to collect all of the necessary networking interfaces into a single API (`Request`, `Response`, and `Headers`). With the intent to make networking easier within JavaScript applications, the Fetch API was directly leveraged by the Service Worker API.
