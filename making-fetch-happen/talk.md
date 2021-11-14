@@ -38,7 +38,7 @@ const response = await fetch('https://ethanarrowood.com')
 const blob = await response.blob()
 ```
 
-An extension of the CORS specification from W3C, the Fetch standard was developed by WHATWG to collect all of the necessary networking interfaces into a single API. With the intent to make networking easier within JavaScript applications, the Fetch API was directly leveraged by the Service Worker API.
+An extension of the CORS specification from W3C, the Fetch standard was developed by WHATWG to collect all of the necessary networking interfaces into a single API (`Request`, `Response`, and `Headers`). With the intent to make networking easier within JavaScript applications, the Fetch API was directly leveraged by the Service Worker API.
 
 Similarly, it didn't take long for the `fetch()` method to adopt the Promise API as well.
 
@@ -56,15 +56,17 @@ The `whatwg/streams` API were integrated into fetch around 2015 [Add "Streams" s
 
 The `AbortSignal` API from the DOM standard was integrated in 2017 [Abortable fetch](https://github.com/whatwg/fetch/commit/0bcd5dfc71ef44319873887f4b83119bd6d0b71d)
 
-## standards, specifications, and implementations oh my!
+## Standards, Specifications, and Implementations, Oh My!
 
-> unfortunately, this isn't the first time I've used this Wizard of Oz joke 🌪
+All of this matters because it demonstrates that these APIs didn't just come from nothing. Each piece of the very intriciate puzzle that is browser APIs is a culmination of decades worth of work to make front end application development better.
 
-All of this matters because it demonstrates that these APIs didn't just come from nothing. Each piece of the very intriciate puzzle that is browser APIs is a culmination of decades worth of work to make front end application development easier.
+And since the Fetch API has had nearly a decade of adoption, it is commonplace for all JavaScript developers.
 
 ## Node.js and the `http` module
 
 Since the very early versions of Node.js, the `http` module and the `http.request()` method have enabled Node developers to make asyncronous network requests. Overtime, many request libraries were created for the Node.js community `request` (now deprecated), `got`, `axios`, `node-fetch`, and many more.
+
+> The Node.js documentation states `http.request()` was added in v0.3.6 <!-- CONFIRM THIS -->
 
 ## So many networking APIs!
 
@@ -74,44 +76,109 @@ Why were (and still are) so many different Node.js networking libraries created?
 
 ## Developer Experience
 
-Everyone has an opinion on what a request library should have. Some just want the basics, others want to be able
+Everyone has an opinion on what a request library should do. Some want to be able to make a basic GET request as easily as possible.
 
-## Fetch
+<!-- Insert example of Got GET request -->
 
-![standards](./standards.png)
+And others want the fastest possible control over their networking operations
 
-## What is the Fetch API?
-
-```js
-const response = await fetch('https://ethanarrowood.com')
-const blob = await response.blob()
-```
-
-The Fetch API is a collection of JavaScript interfaces for doing HTTP related things. It is the successor to `XMLHttpRequest`, and is mainly used via the global `fetch()` method demonstrated in the example above. This method enables developers to make asynchronous network requests from their JavaScript applications. In addition to the global method, the API exposes the `Request`, `Response`, and `Headers` classes that enable a better developer experience through some object-oriented aspects.
+<!-- Insert undici example -->
 
 ## node-fetch
 
-First created in [January 2015](https://github.com/node-fetch/node-fetch/commits?since=2015-01-01&until=2015-01-31), the node-fetch project worked to bring the Fetch API to Node.js
+And of course, other implementations strived to bring the familiarity of the browser to Node.js!
 
+First created in [January 2015](https://github.com/node-fetch/node-fetch/commits?since=2015-01-01&until=2015-01-31), the node-fetch project worked to bring the Fetch API to Node.js.
 
+## Since then...
 
-James doing work on lower level apis
+[make-fetch-happen]
 
-Add Fetch to Node issue
+[isomorphic-fetch]
 
-Collab summit Myles, opened PR to vendor Fetch into core
+## Adding Fetch to Node
 
-Include other userland implementations, make-fetch-happen, node-fetch, fetch.
+[Add Fetch to Node issue]
 
-What is Fetch? How did it wind up getting standardized in the first place?
+[Myles PR to vendor Fetch into core]
 
-Concept of universal javascript - motivation to support these apis to begin with
+## Isomorphic JavaScript
 
-The story of how and why things happen is more interesting than the technical details.
+Most of these efforts are inspired by the concept of isomorphic or universal JavaScript. The ability for code to be executed in _any_ JavaScript runtime environment.
 
-critical code studies
+For trivial examples, such as using Array prototype methods or Promises, this is generally effortless as long as both environments support the relevant ECMAScript version:
 
-Decisions haven't been made by TSC to include undici in Node
+```js
+function sumArray (arr) {
+  return arr.reduce((s, c) => s += c, 0)
+}
 
-What are the requirements to get undici/fetch into Node?
+sumArray([1, 2, 3])
+```
 
+But browser environments go beyond just implementing ECMAScript; as shown earlier, browsers are full of APIs backed by WHATWG and W3C standards. So, given some JavaScript written for the browser environment, it will most likely fail to run on non-browser runtimes like Node.js
+
+```js
+document.getElementById('button').onclick = function () {
+  console.log('Hello, World!')
+}
+```
+
+> Throws `Uncaught ReferenceError: document is not defined` when executed with Node.js
+
+## Isomorphic JavaScript - PWAs
+
+One of the driving factors for isomorphic JavaScript is use within progressive web applications. Using the same JavaScript code to render on the server (generally within Node.js), and continue to render from within the browser (generally leveraging Service Workers too 😉).
+
+But this problem space gets complicated quickly, but lets work through it anyways.
+
+When a user requests my application, I can serve them the basic HTML file with some JavaScript that executes `onload` to render whatever I want. Easy enough, and lots of common frameworks do exactly this (👋 `ReactDOM.render()`). But now my user has to wait for that JavaScript to execute before they can see my app. This takes time, and users are impatient. So now I want to use some JavaScript to render my application on the server first, stream the rendered HTML directly to the user, and then send the relevant JavaScript to make the page interactable.
+
+Okay cool! This seems easy enough. Execute the same JavaScript that renders my page, capture the result as a blob and send it off to the user with the relavent `Content-Type`. Right now, my app renders a static splash page for the initial load, so this was simple enough to implement and works just fine. But now I want to add a new feature to my application, displaying the current weather.
+
+In order to do so, my application needs to make a network request to a weather API before it puts together the HTML. (For now, ignore the sensible UX concerns around waiting for a network request response for an initial application render). I modify my JavaScript to include a `fetch` statement that fetches the weather information for my application. I try running this code on the server but it fails: `Uncaught ReferenceError: fetch is not defined`!
+
+Now what? If you remember, there was a plethora of libraries and modules created that sounds like they could help us. With options like `isomorphic-fetch` and `cross-fetch` we can always ensure that the `fetch` API is available to us, regardless of the environment!
+
+Leveraging one of these tools, the app can now use the same `fetch` call for the initial rendering on the server, and later updates on the client 🚀
+
+## Tale of Multiple Concerns
+
+So as identified, there are many reasons why developers want more `fetch`.
+
+- It has an impressivly positive developer experience (never forget how opinionated developers can be about trivial things like tabs vs spaces or semicolons).
+- It is familiar for all JavaScript developers. Whether you've been building websites for 10 years, or last month. You are probably familiar with the Fetch API.
+- For the performance and user expierence gains of isomorphic JavaScript, making runtimes like Node.js compatible with these APIs is a huge plus to avoid complex build tooling and use of modules like `cross-fetch`
+
+## What is Node.js doing?
+
+As of recently, Node.js has listened and learned from its community and has been adding more and more browser APIs to core. We've added things such as:
+
+- URL
+- EventTarget
+- AbortController
+- WHATWG Streams
+- structuredClone
+
+> tremendous thank you to everyone involved in this work ❤️
+
+And now with these pieces, we were finally able to land an implementation of Fetch within the next-generation HTTP client [undici]().
+
+> Undici is an official Node.js library maintained and contributed to by many of the same core Node.js developers
+
+## But we aren't done yet
+
+- Undici is still not apart of core
+- Many of the APIs Fetch requires are still shipped as **experimental** from Node
+- There is so much comprised within the Fetch API that doesn't apply to server environments, we aren't sure yet if we got it 100% right (looking at you CORS).
+
+## Nonetheless, its worth celebrating 🎉
+
+From all of the major contributions, to the idea of even landing an experimental version of such a complicated API, I want to have a huge shoutout to everyone involved from the WHATWG and W3C standards process to the Node.js implementations.
+
+## How can you help?
+
+- Try out undici fetch!
+  - If you are actively using node-fetch, try swapping it out for undici fetch. The API 
+- Contribute to undici and Node.js
+- Keep working on and showing us examples of how isomorphic JavaScript
