@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <title>Big</title>
+  <title>Making Fetch Happen</title>
   <link href="big.css" rel="stylesheet" type="text/css" />
   <link href="themes/light.css" rel="stylesheet" type="text/css" />
   <script src="big.js"></script>
@@ -21,25 +21,35 @@
   </div>
 
   <div>
-    <img src="./media/lincoln-trying-to-fetch.png" alt="Lincoln trying (and failing) to catch a frisbee">
+    <!-- <img src="./media/lincoln-trying-to-fetch.png" alt="Lincoln trying (and failing) to catch a frisbee"> -->
     <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/Kp7GvsU7_cE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-    <!-- <video src="./lincoln-fetch.mp4" type="video/mp4" controls="controls" height="100%" name="Video of Lincoln attempting to fetch a frisbee"></video> -->
+    <video src="./media/lincoln-fetch.mp4" type="video/mp4" controls="controls" height="100%" name="Video of Lincoln attempting to fetch a frisbee"></video>
   </div>
 
   <div>
     XMLHttpRequest
     <img src="./media/laptop-server.svg" alt="">
+    <notes>
+      Starting back in the early 2000s, the `XMLHttpRequest` interface was created for the purpose of interacting with servers without the need to refresh a web page.
+      The interface is heavily used in AJAX programming.
+    </notes>
   </div>
 
   <div>
     <span style="text-decoration: underline;">AJAX</span>
     <br>
     <small>Asynchronous JavaScript and XML</small>
+    <notes>
+      The abbreviation stands for Asynchronous JavaScript and XML; a concept coined in 2005 that, in short, is one of the earliest programming models to enable interactive web applications.
+    </notes>
   </div>
 
   <div>
     XHR Specification
     <small>https://xhr.spec.whatwg.org</small>
+    <notes>
+      Like all major aspects of the web, the `XMLHttpRequest` interface is backed by a standard, specifically the XHR Specification. It was originally introduced as part of WHATWG's HTML effort, then moved to W3C in 2006, and then moving back to WHATWG in 2012 where it continues to reside. I'll spare you the details of the early politics of the two standards groups.
+    </notes>
   </div>
 
   <div>
@@ -55,27 +65,42 @@
   </div>
 
   <div class='layout' style='grid-template-rows: 40% 50% 10%;'>
-    <div>Service Workers</div>
+    <div>Service Workers (2013)</div>
     <img src="./media/undraw_engineering_team_u99p.svg" alt="">
     <small>https://w3c.github.io/ServiceWorker/</small>
+    <notes>
+      First introduced in 2013, the Service Workers API is a programmable network proxy giving developers complete control of the networking capabilities of their web application.
+    </notes>
   </div>
 
   <div class='layout' style='grid-template-rows: 50% 50%;'>
     <div class="nowrap">Programmable network proxy</div>
     <img src="./media/service-worker.png" alt="diagram of web application & service worker flow">
+    <notes>
+      A common use case for service workers is to provide a quality offline user experience for web applications through the form of caching and not letting application network requests fail due to a lack of connection.
+    </notes>
   </div>
 
   <div class='layout' style='grid-template-rows: 50% 50%;'>
-    <div>Promises</div>
+    <div>Promises (~2013)</div>
     <img src="./media/undraw_business_deal_re_up4u.svg" alt="">
+    <notes>
+      Around the same time, the now common-place Promise API was introduced to the JavaScript language making asynchronous programming for web applications even easier.
+    </notes>
   </div>
 
   <div>
     <img src="./media/undraw_fitting_piece_iilo.svg" alt="">
+    <notes>
+      Something was missing
+    </notes>
   </div>
 
   <div>
     Better Networking Interfaces
+    <notes>
+      For a better developer experience, the Service Worker API needed better networking interfaces...
+    </notes>
   </div>
 
   <div>
